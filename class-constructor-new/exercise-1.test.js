@@ -102,23 +102,31 @@ describe('Testing Vector', () => {
         }
       });
     });
-
-    it('should throw error if compare to an invalid Vector', () => {
-      try {
-        v1.equals(null);
-        expect(false).toBeTruthy();
-      } catch (error) {
-        expect(error.message).toEqual(invalidVector.message);
-      }
-    });
-    it('should return true if 2 vector having the same length', () => {
-      expect(v1.equals(v2)).toEqual(true);
-    });
-    it('should return false if 2 vector having different length', () => {
-      expect(v1.equals(v3)).toEqual(false);
-    });
-    it('should represent vector as string format', () => {
-      expect(v1.toString()).toEqual('(1,2,3)');
-    });
+    describe('comparing 2 Vectors', () => {
+      it('should throw error if compare to an invalid Vector', () => {
+        try {
+          v1.equals(null);
+          expect(false).toBeTruthy();
+        } catch (error) {
+          expect(error.message).toEqual(invalidVector.message);
+        }
+      });
+      it('should return true if 2 vector having the same length', () => {
+        expect(v1.isHavingSameLength(v2)).toEqual(true);
+      });
+      it('should return false if 2 vector having different length', () => {
+        expect(v1.equals(v3)).toEqual(false);
+      });
+      it('should represent vector as string format', () => {
+        expect(v1.toString()).toEqual('(1,2,3)');
+      });
+      it('should return true if 2 Vectors are equal', () => {
+        const v1Replicate = new Vector(v1);
+        expect(v1.equals(v1Replicate)).toEqual(true);
+      })
+      it('should return false if 2 Vectors are not equal', () => {
+        expect(v1.equals(v2)).toEqual(false);
+      })
+    })
   });
 });

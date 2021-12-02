@@ -1,10 +1,11 @@
+
 export class Vector extends Array {
   constructor(argIn) {
     if (!Vector.validateConstructorParams(argIn)) {
       throw new Error('Invalid constructor argument');
     }
 
-    super(...argIn);
+    super(...argIn)
   }
 
   static validateConstructorParams(argIn) {
@@ -20,15 +21,16 @@ export class Vector extends Array {
    * @returns {boolean}
    */
   equals(ve) {
-    if (!ve || !(ve instanceof Array)) {
-      throw new Error('Not a valid Vector');
-    }
-
-    return this.length === ve.length;
+    return this.isHavingSameLength(ve) && this.every((c, i) => c === ve[i])
   }
 
+  /**
+   * @param {Vector} ve
+   * @param {Function} cb
+   * @returns {Vector}
+   */
   calc(ve, cb) {
-    if (this.equals(ve)) {
+    if (this.isHavingSameLength(ve)) {
       const newVector = this.reduce((acc, curr, i) => {
         acc.push(cb(curr, ve[i]));
         return acc;
@@ -38,6 +40,24 @@ export class Vector extends Array {
     } else {
       throw new Error('Both vector must have same length');
     }
+  }
+
+  /**
+   * @param {Vector} ve
+   */
+  isHavingSameLength(ve) {
+    return this.isValidVector(ve) && this.length === ve.length
+  }
+
+  /**
+   *
+   * @param {Vector} ve
+   */
+  isValidVector(ve) {
+    if (!ve || !(ve instanceof Array)) {
+      throw new Error('Not a valid Vector');
+    }
+    return true;
   }
 
   /**
@@ -70,4 +90,16 @@ export class Vector extends Array {
 
     return Math.sqrt(sumOfSqrt);
   }
+
+  scaleBy(number) {
+    return new Vector(Array.from(this).map(i => i * number))
+  }
 }
+
+
+
+const vector = new Vector([2, 3, 4])
+const vector2 = new Vector(vector)
+
+const vector3 = new Vector([-2,3,4])
+console.log(vector.equals(vector3))

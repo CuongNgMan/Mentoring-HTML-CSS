@@ -2,7 +2,7 @@
   "name": "mentoring-html-css",
   "version": "1.0.0",
   "description": "\"EPAM Frontend mentoring program\"",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest --watch"
   },

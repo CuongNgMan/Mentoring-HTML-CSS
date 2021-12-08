@@ -1,4 +1,4 @@
-export class MyPromise extends Promise {
+class MyPromise extends Promise {
   constructor(cb) {
     super(cb);
     this.basePromise = cb;
@@ -10,7 +10,9 @@ export class MyPromise extends Promise {
   }
 
   then(cb) {
-    queueMicrotask(() => cb());
+    queueMicrotask(() => {
+      cb();
+    });
     return this;
   }
 }
@@ -20,8 +22,8 @@ function main() {
     console.log(1);
     resolve();
   })
-    .syncThen(() => console.log(2))
     .then(() => console.log(4))
+    .syncThen(() => console.log(2))
     .syncThen(() => console.log(5))
     .then(() => console.log(7));
 }

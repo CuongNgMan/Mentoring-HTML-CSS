@@ -18,7 +18,7 @@ class ReversePromise extends Promise {
 }
 
 function main() {
-  const p = new ReversePromise((resolve, _reject) => {
+  const p = new ReversePromise((resolve) => {
     console.log(1);
     resolve();
   })

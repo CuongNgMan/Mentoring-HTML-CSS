@@ -1,33 +1,32 @@
 (() => {
-  const table = document.querySelector('#row-container')
+  const table = document.querySelector('#row-container');
 
-  const ROW = 100
-  const COL = 100
+  const ROW = 100;
+  const COL = 100;
 
   function createARow(col, start) {
-    const tr = document.createElement('tr')
+    const tr = document.createElement('tr');
 
-    let td = null
-    for(let i = start; i < col; i++) {
-      td = document.createElement('td')
-      td.className = 'box'
-      td.innerText = Number.parseInt(`${i+1}`)
-      td.setAttribute('draggable', true)
-      tr.appendChild(td)
+    let td;
+    for (let i = start; i < col; i++) {
+      td = document.createElement('td');
+      td.className = 'box';
+      td.innerText = Number.parseInt(`${i + 1}`);
+      td.setAttribute('draggable', true);
+      tr.appendChild(td);
     }
 
-    return tr
+    return tr;
   }
 
   function generate(row, col) {
     for (let i = 0; i < row; i++) {
-      const tr = createARow(col * (i+1), col * i)
-      table.appendChild(tr)
+      const tr = createARow(col * (i + 1), col * i);
+      table.appendChild(tr);
     }
-
   }
 
-  generate(ROW, COL)
+  generate(ROW, COL);
 
   function handleDragStart(e) {
     this.style.opacity = '0.4';
@@ -74,7 +73,7 @@
 
   let items = document.querySelectorAll('#row-container .box');
 
-  items.forEach(function(item) {
+  items.forEach(function (item) {
     item.addEventListener('dragstart', handleDragStart);
     item.addEventListener('dragover', handleDragOver);
     item.addEventListener('dragenter', handleDragEnter);
@@ -82,4 +81,4 @@
     item.addEventListener('dragend', handleDragEnd);
     item.addEventListener('drop', handleDrop);
   });
-})()
+})();

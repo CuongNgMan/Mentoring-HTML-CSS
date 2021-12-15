@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "ts:advance": "ts-node typescript-advance/exercise-1.ts"
+    "ts:advance": "ts-node typescript-advance/demo.ts"
   },
   "repository": {
     "type": "git",
